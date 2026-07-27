@@ -1,0 +1,121 @@
+:root {
+  color-scheme: light;
+  --bg: #fff8fb;
+  --card: rgba(255, 255, 255, 0.85);
+  --text: #4f405d;
+  --muted: #7b6a83;
+  --accent: #f4b3c2;
+  --accent-2: #cfc2ff;
+  --accent-3: #bfe8db;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(244, 179, 194, 0.3), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(207, 194, 255, 0.35), transparent 28%),
+    linear-gradient(135deg, #fff8fb 0%, #fef7fc 100%);
+}
+
+.page-shell {
+  min-height: 100vh;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+}
+
+.hero-card {
+  max-width: 760px;
+  width: 100%;
+  background: var(--card);
+  border: 1px solid rgba(106, 90, 122, 0.12);
+  border-radius: 32px;
+  padding: 40px;
+  box-shadow: 0 18px 50px rgba(124, 96, 129, 0.16);
+  backdrop-filter: blur(10px);
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: #d47fa0;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 4vw, 3.2rem);
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+
+.hero-copy {
+  font-size: 1.04rem;
+  line-height: 1.75;
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button.primary {
+  background: var(--accent);
+  color: #6d3650;
+  box-shadow: 0 8px 18px rgba(244, 179, 194, 0.25);
+}
+
+.button.secondary {
+  background: #ffffff;
+  color: var(--text);
+  border: 1px solid rgba(106, 90, 122, 0.14);
+}
+
+.info-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.info-strip span {
+  background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+  color: #4f405d;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 16px;
+  }
+
+  .hero-card {
+    padding: 28px 22px;
+  }
+}
