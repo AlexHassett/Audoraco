@@ -1,8 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const brand = document.querySelector('.brand');
-  if (brand) {
-    brand.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
+document.querySelector('.newsletter form')?.addEventListener('submit', (event) => {
+  event.preventDefault();
+  event.currentTarget.querySelector('input').value = '';
+  event.currentTarget.querySelector('input').placeholder = 'Thank you for subscribing';
 });
