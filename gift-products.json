@@ -1,0 +1,27 @@
+{
+  "collection": {
+    "eyebrow": "The Audora Gift Collection",
+    "heading": "Thoughtful gifts for their biggest little moments",
+    "description": "Beautifully curated gifts to celebrate new beginnings, first milestones and the women at the heart of them."
+  },
+  "products": [
+    {
+      "name": "Hello Little One",
+      "type": "Baby Shower Gift Box",
+      "description": "A thoughtful collection to welcome their littlest love.",
+      "route": "hello-little-one.html"
+    },
+    {
+      "name": "One Whole Year",
+      "type": "First Birthday Gift Box",
+      "description": "A beautiful way to celebrate one whole year of them.",
+      "route": "one-whole-year.html"
+    },
+    {
+      "name": "For Mama",
+      "type": "Postpartum Gift Box",
+      "description": "A little luxury, thoughtfully chosen just for her.",
+      "route": "for-mama.html"
+    }
+  ]
+}
