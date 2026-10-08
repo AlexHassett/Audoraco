@@ -64,7 +64,7 @@ a {
   grid-column: 1;
   justify-self: start;
   display: flex;
-  gap: 31px;
+  gap: 38px;
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -154,22 +154,32 @@ a {
   display: flex;
   align-items: center;
   overflow: hidden;
+  background-image: url("ball-pit-hero.jfif");
+  background-repeat: no-repeat;
+  background-position: 60% 52%;
+  background-size: 138% auto;
 }
 
-.hero-image {
+.hero::before {
+  content: "";
   position: absolute;
+  z-index: 1;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(249, 248, 247, 0.95) 0%, rgba(244, 242, 240, 0.64) 43%, rgba(244, 242, 240, 0.08) 72%),
-    url("audora-soft-play-temp.jpeg") 57% 58%/cover;
-  filter: none;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(248, 245, 240, 0.84) 0%, rgba(248, 245, 240, 0.8) 25%, rgba(248, 245, 240, 0.66) 43%, rgba(248, 245, 240, 0.43) 59%, rgba(248, 245, 240, 0.21) 73%, rgba(248, 245, 240, 0.07) 85%, rgba(248, 245, 240, 0) 94%);
 }
 
 .hero-content {
   position: relative;
-  width: min(590px, 90%);
+  z-index: 2;
+  width: min(560px, 38.5%);
   margin-left: 6.5%;
   padding: 65px 0;
+}
+
+.hero-content h1,
+.play-hero-content h1 {
+  font-size: clamp(42px, 4.3vw, 62px);
 }
 
 .eyebrow {
@@ -278,6 +288,64 @@ h1 {
   max-width: 1200px;
   margin: auto;
   padding: 44px 20px;
+}
+
+.audora-way {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+.audora-way-heading {
+  text-align: center;
+}
+
+.audora-way-heading .eyebrow {
+  font-size: 11px;
+}
+
+.audora-way-heading h2 {
+  margin: 0;
+  font-size: clamp(36px, 4vw, 54px);
+  letter-spacing: 0.025em;
+}
+
+.audora-way-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  max-width: 980px;
+  aspect-ratio: 9 / 4;
+  margin: 42px auto 0;
+}
+
+.audora-way-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.audora-way-image-main {
+  grid-row: 1 / 3;
+  object-position: center;
+}
+
+.audora-way-image-bunny {
+  object-position: center 44%;
+}
+
+.audora-way-image-child {
+  object-position: center 48%;
+}
+
+.audora-way-caption {
+  margin: 24px auto 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
 }
 
 .mobile-menu-toggle {
@@ -470,6 +538,20 @@ footer {
   font-size: 12px;
 }
 
+.footer-logo {
+  display: block;
+  width: 160px;
+  max-width: 100%;
+  line-height: 0;
+}
+
+.footer-logo img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
 .footer-top p,
 footer a {
   display: block;
@@ -613,6 +695,36 @@ footer h4 {
   background: var(--cream);
 }
 
+.bookings-opening {
+  max-width: 760px;
+  min-height: 410px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.bookings-opening[hidden] {
+  display: none;
+}
+
+.bookings-opening h1 {
+  max-width: 700px;
+  margin: 0;
+  font-size: clamp(40px, 5vw, 60px);
+}
+
+.bookings-opening > p:not(.eyebrow) {
+  max-width: 610px;
+  margin: 20px auto 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.75;
+}
+
 .enquiry-intro {
   max-width: 760px;
   margin: 0 auto 48px;
@@ -702,6 +814,138 @@ footer h4 {
 
 .form-field {
   min-width: 0;
+}
+
+.calendar-field {
+  position: relative;
+}
+
+.calendar-field input[readonly] {
+  cursor: pointer;
+  background: #fff;
+}
+
+.availability-calendar {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 8px);
+  left: 0;
+  width: min(360px, calc(100vw - 40px));
+  border: 1px solid var(--line);
+  background: #fbfaf8;
+  padding: 18px;
+  box-shadow: 0 16px 34px rgba(80, 68, 60, 0.11);
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: 34px 1fr 34px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.calendar-header p {
+  margin: 0;
+  color: var(--ink);
+  font-family: "DM Serif Display", serif;
+  font-size: 19px;
+  text-align: center;
+}
+
+.calendar-nav {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.calendar-nav:disabled {
+  cursor: default;
+  opacity: 0.3;
+}
+
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.calendar-weekdays {
+  margin-bottom: 6px;
+}
+
+.calendar-weekdays span {
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  border: 1px solid #d7d1cc;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+  font: 10px "DM Sans", sans-serif;
+}
+
+.calendar-day:hover:not(:disabled),
+.calendar-day:focus-visible,
+.calendar-day.is-selected {
+  outline: none;
+  border-color: #81756d;
+  background: #e9e4de;
+}
+
+.calendar-day:disabled {
+  border-color: #e8e3df;
+  background: #f0ede9;
+  color: #aaa19a;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.calendar-day.is-outside-month {
+  visibility: hidden;
+}
+
+.calendar-key {
+  display: flex;
+  gap: 18px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.calendar-key span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.calendar-key i {
+  width: 11px;
+  height: 11px;
+  border: 1px solid #d7d1cc;
+  background: #fff;
+}
+
+.calendar-key i.is-unavailable,
+.calendar-key i.is-past {
+  border-color: #e8e3df;
+  background: #f0ede9;
+}
+
+.calendar-key i.is-past {
+  opacity: 0.6;
 }
 
 .form-field label,
@@ -1112,16 +1356,32 @@ footer h4 {
   display: flex;
   align-items: center;
   overflow: hidden;
+  background: var(--cream);
+}
+
+.play-hero::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(248, 245, 240, 0.94) 0%, rgba(248, 245, 240, 0.9) 28%, rgba(248, 245, 240, 0.72) 45%, rgba(248, 245, 240, 0.4) 62%, rgba(248, 245, 240, 0.14) 78%, rgba(248, 245, 240, 0) 92%);
 }
 
 .play-hero-image {
   position: absolute;
-  inset: 0;
-  background: #dcdad6;
+  z-index: 0;
+  inset: 0 auto 0 -7%;
+  width: 114%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: none;
 }
 
 .play-hero-content {
   position: relative;
+  z-index: 2;
   width: min(570px, 88%);
   margin-left: 7%;
   padding: 74px 0;
@@ -1194,10 +1454,19 @@ footer h4 {
   background: #fbfaf8;
 }
 
+.package-card[hidden] {
+  display: none;
+}
+
 .package-image {
   width: 100%;
-  aspect-ratio: 4 / 3;
   background: #ddd9d4;
+}
+
+.package-image img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .package-image-classic {
@@ -1321,10 +1590,10 @@ footer h4 {
 .palette-image {
   display: block;
   width: 100%;
-  aspect-ratio: 5 / 3;
+  aspect-ratio: 3 / 2;
   border: 1px solid var(--line);
   background: #f7f6f3;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
 
@@ -3416,6 +3685,24 @@ body.cart-open {
   }
 }
 
+@media (max-width: 960px) {
+  .hero {
+    min-height: 520px;
+    align-items: center;
+    flex-direction: row;
+    background-position: 58% 52%;
+    background-size: auto 132%;
+  }
+
+  .hero-content {
+    order: initial;
+    width: min(620px, 78%);
+    max-width: 620px;
+    margin-left: 7%;
+    padding: 54px 0;
+  }
+}
+
 @media (max-width: 800px) {
   .nav-links {
     position: absolute;
@@ -3478,17 +3765,16 @@ body.cart-open {
   }
 
   .hero {
-    min-height: 560px;
-  }
-
-  .hero-image {
-    background:
-      linear-gradient(90deg, rgba(246, 241, 235, 0.92), rgba(246, 241, 235, 0.45)),
-      url("audora-soft-play-temp.jpeg") 58% 58%/cover;
+    min-height: 520px;
+    background-position: 60% 52%;
+    background-size: auto 130%;
   }
 
   .hero-content {
-    margin-left: 8%;
+    width: auto;
+    max-width: 620px;
+    margin: 0;
+    padding: 48px 8%;
   }
 
   .promise {
@@ -3790,6 +4076,10 @@ body.cart-open {
     margin: 0;
   }
 
+  .footer-logo {
+    width: 135px;
+  }
+
   .header-actions {
     gap: 11px;
   }
@@ -3813,15 +4103,19 @@ body.cart-open {
 
   .hero {
     min-height: 520px;
+    background-position: 62% 52%;
+    background-size: auto 128%;
   }
 
   .hero-content {
-    margin-left: 7%;
+    margin: 0;
+    padding: 42px 7% 46px;
   }
 
   .hero-content > p:not(.eyebrow) {
     width: auto;
-    padding-right: 30px;
+    max-width: 100%;
+    padding-right: 0;
   }
 
   .button-row {
@@ -3843,6 +4137,48 @@ body.cart-open {
 
   .section {
     padding: 36px 16px;
+  }
+
+  .audora-way {
+    padding-top: 54px;
+    padding-bottom: 54px;
+  }
+
+  .audora-way-heading h2 {
+    font-size: clamp(32px, 9vw, 42px);
+    line-height: 1.12;
+  }
+
+  .audora-way-gallery {
+    display: flex;
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    margin-top: 32px;
+    flex-direction: column;
+  }
+
+  .audora-way-image {
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
+
+  .audora-way-image-bunny,
+  .audora-way-image-child {
+    width: 82%;
+  }
+
+  .audora-way-image-bunny {
+    align-self: flex-start;
+  }
+
+  .audora-way-image-child {
+    align-self: flex-end;
+  }
+
+  .audora-way-caption {
+    max-width: 290px;
+    margin-top: 20px;
   }
 
   .gallery-grid {
@@ -3894,6 +4230,16 @@ body.cart-open {
 
   .enquiry-intro {
     margin-bottom: 36px;
+  }
+
+  .bookings-opening {
+    min-height: 360px;
+  }
+
+  .availability-calendar {
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px;
   }
 
   .event-enquiry-form {

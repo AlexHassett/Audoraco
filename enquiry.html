@@ -8,18 +8,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260824-1" />
+    <link rel="stylesheet" href="styles.css?v=20261007-19" />
   </head>
   <body class="contact-page">
     <div class="announcement">Premium children's soft play hire <span></span> Sydney, Australia</div>
     <header class="site-header">
       <nav class="nav-links" aria-label="Main navigation">
-        <a href="index.html">Home</a><a href="play.html">Soft Play</a><a href="play.html#packages">Packages</a><a href="faq.html">FAQs</a><a href="enquiry.html" aria-current="page">Contact</a>
+        <a href="index.html">Home</a><a href="play.html">Soft Play</a><a href="faq.html">FAQs</a><a href="enquiry.html" aria-current="page">Contact</a>
       </nav>
       <a class="header-logo" href="index.html" aria-label="Audora Co home"><img src="audora-logo.jfif?v=20260824-1" alt="Audora Co" /></a>
-      <div class="header-actions"><button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button><a class="button button-outline header-quote" href="enquiry.html">Get a Quote</a></div>
+      <div class="header-actions"><button class="mobile-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button><a class="button button-outline header-quote" href="enquiry.html">Make an Enquiry</a></div>
     </header>
     <main class="enquiry-main">
+      <section class="bookings-opening" id="bookings-opening" aria-labelledby="bookings-opening-title">
+        <p class="eyebrow">Audora Play Enquiry</p>
+        <h1 id="bookings-opening-title">Bookings opening 31 October 2026</h1>
+        <p>We’re getting everything ready to bring beautiful soft play to your celebrations. Enquiries will open on 31 October 2026.</p>
+      </section>
+
+      <div id="enquiry-content" hidden>
       <section class="enquiry-intro" aria-labelledby="enquiry-title">
         <p class="eyebrow">Audora Play Enquiry</p>
         <h1 id="enquiry-title">Let's Create Their Play Space</h1>
@@ -31,7 +38,7 @@
         <fieldset class="form-section">
           <legend><span>01</span> Your Celebration</legend>
           <div class="form-grid form-grid-three">
-            <div class="form-field"><label for="event-date">Event Date <span aria-hidden="true">*</span></label><input id="event-date" name="eventDate" type="date" required /></div>
+            <div class="form-field calendar-field"><label for="event-date">Event Date <span aria-hidden="true">*</span></label><input id="event-date" name="eventDate" type="text" inputmode="none" autocomplete="off" placeholder="Select an available date" aria-controls="availability-calendar" aria-expanded="false" readonly required /><div class="availability-calendar" id="availability-calendar" hidden><div class="calendar-header"><button type="button" class="calendar-nav" id="calendar-previous" aria-label="Previous month">‹</button><p id="calendar-month" aria-live="polite"></p><button type="button" class="calendar-nav" id="calendar-next" aria-label="Next month">›</button></div><div class="calendar-weekdays" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div class="calendar-days" id="calendar-days" role="grid" aria-labelledby="calendar-month"></div><div class="calendar-key" aria-label="Calendar key"><span><i class="is-available"></i>Available</span><span><i class="is-unavailable"></i>Unavailable</span></div></div></div>
             <div class="form-field"><label for="event-start-time">Event Start Time <span aria-hidden="true">*</span></label><input id="event-start-time" name="eventStartTime" type="time" required /></div>
             <div class="form-field"><label for="event-finish-time">Event Finish Time <span aria-hidden="true">*</span></label><input id="event-finish-time" name="eventFinishTime" type="time" aria-describedby="event-duration-message" required /></div>
             <div class="form-field"><label for="venue-name">Venue Name</label><input id="venue-name" name="venueName" type="text" /></div>
@@ -42,7 +49,7 @@
             <div class="form-field" id="outdoor-surface-field" hidden><label for="surface-type">Surface Type <span aria-hidden="true">*</span></label><select id="surface-type" name="surfaceType" disabled><option value="">Select surface type</option><option>Grass</option><option>Concrete</option><option>Other</option></select></div>
             <div class="form-field"><label for="occasion">Occasion</label><select id="occasion" name="occasion"><option value="">Select occasion</option><option>First birthday</option><option>Birthday</option><option>Baptism / Christening</option><option>Baby shower</option><option>Other</option></select></div>
             <div class="form-field"><label for="venue-access">Venue Access <span aria-hidden="true">*</span></label><select id="venue-access" name="venueAccess" required><option value="">Select venue access</option><option>Ground floor / easy access</option><option>Lift access</option><option>Stairs</option><option>Not sure</option></select></div>
-            <div class="form-field"><label for="little-guests">Approx. Number of Little Guests</label><input id="little-guests" name="littleGuests" type="number" min="0" inputmode="numeric" /></div>
+            <div class="form-field"><label for="little-guests">Approx. Number of Children</label><input id="little-guests" name="littleGuests" type="number" min="0" inputmode="numeric" /></div>
             <div class="form-field form-field-full"><label for="parking-notes">Parking / Loading Notes</label><textarea id="parking-notes" name="parkingNotes" rows="4" placeholder="Let us know about stairs, lifts, loading zones, parking or anything that may affect setup."></textarea></div>
           </div>
           <p class="form-guidance" id="event-duration-message" aria-live="polite"></p>
@@ -51,8 +58,8 @@
         <fieldset class="form-section">
           <legend><span>02</span> Your Play Space</legend>
           <div class="form-grid form-grid-two">
-            <div class="form-field"><label for="package-preference">Package Preference <span aria-hidden="true">*</span></label><select id="package-preference" name="packagePreference" required><option value="">Select a package</option><option>Little Play — 3m × 3m — $400</option><option>Classic Play — 3m × 4m — $550</option><option>Signature Play — 4m × 4m — $650</option><option>Grand Play — 5m × 5m — $850</option><option>I'm not sure — help me choose</option></select><small class="field-help">All packages include up to 6 hours hire, professional setup and pack-down. Delivery is quoted based on event location.</small></div>
-            <div class="form-field"><label for="colour-palette">Colour Palette <span aria-hidden="true">*</span></label><select id="colour-palette" name="colourPalette" required><option value="">Select a colour palette</option><option>Signature White</option><option>Blush Pink</option><option>Soft Blue</option><option>Soft Sage</option><option>I'm not sure yet</option></select><small class="field-help">Colour palettes are created using our signature white soft play with your chosen colour accents. Exact colour placement varies by package and setup.</small></div>
+            <div class="form-field"><label for="package-preference">Package Preference <span aria-hidden="true">*</span></label><select id="package-preference" name="packagePreference" required><option value="">Select a package</option><option>Little Play — 2m × 3m — $400</option><option>Classic Play — 3m × 4m — $550</option></select><small class="field-help">All packages include up to 6 hours hire, professional setup and pack-down. Delivery is quoted based on event location.</small></div>
+            <div class="form-field"><label for="colour-palette">Colour Palette <span aria-hidden="true">*</span></label><select id="colour-palette" name="colourPalette" required><option value="">Select a colour palette</option><option>All White</option><option>Pink</option><option>Blue</option><option>Green</option></select><small class="field-help">Colour palettes are created using our signature white soft play with your chosen colour accents. Exact colour placement varies by package and setup.</small></div>
             <div class="form-field form-field-full"><label for="additional-details">Anything Else We Should Know?</label><textarea id="additional-details" name="additionalDetails" rows="7" placeholder="Tell us about your celebration, venue or anything you'd like us to consider."></textarea></div>
           </div>
         </fieldset>
@@ -69,16 +76,18 @@
 
         <p class="quote-process-note">Once we receive your enquiry, we'll confirm availability and prepare your personalised quote, including any applicable delivery fee.</p>
 
-        <aside class="booking-information" aria-labelledby="booking-information-title"><h2 id="booking-information-title">How Booking Works</h2><p>Submitting an enquiry does not hold your event date.</p><p>Once availability is confirmed and your quote is issued, your date will be held for <strong>48 hours</strong>. A <strong>50% deposit</strong> is required within this time to secure your booking.</p><p>The remaining balance is due <strong>7 days before your event</strong>.</p></aside>
+        <aside class="booking-information" aria-labelledby="booking-information-title"><h2 id="booking-information-title">How Booking Works</h2><p>Submitting an enquiry does not hold your event date. Once availability is confirmed and your quote is issued, your event date will be held for <strong>48 hours</strong>. A <strong>50% deposit</strong> is required within this time to secure your booking. The remaining balance is due <strong>7 days before your event</strong>.</p></aside>
 
         <div class="form-submit">
-          <button class="button button-solid" type="submit">Send My Enquiry</button>
+          <button class="button button-solid" type="submit">Make an Enquiry</button>
           <div class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1"></div>
         </div>
       </form>
+      </div>
     </main>
 
-    <footer id="about"><div class="footer-top"><div><a class="brand" href="index.html">Audora<small>co</small></a><p>Premium play for<br />beautiful little celebrations.</p></div><div><h4>Soft Play</h4><a href="play.html">Soft play hire</a><a href="play.html#packages">Packages</a><a href="enquiry.html">Get a quote</a></div><div><h4>Information</h4><a href="about.html">About us</a><a href="faq.html">FAQs</a><a href="enquiry.html">Contact</a></div><div class="newsletter"><h4>Join our mailing list</h4><p>Be the first to know about package updates and availability.</p><form><input type="email" placeholder="Enter your email" aria-label="Email address" /><button class="button button-solid">Subscribe</button></form></div></div><div class="footer-bottom"><span>© 2026 Audora Co. All rights reserved.</span><span><a href="terms.html">Terms &amp; Conditions</a> &nbsp;&nbsp; Privacy Policy</span></div></footer>
+    <footer id="about"><div class="footer-top"><div><a class="footer-logo" href="index.html" aria-label="Audora Co home"><img src="audora-logo-transparent.png" alt="Audora Co" width="160" /></a><p>Premium play for<br />beautiful little celebrations.</p></div><div><h4>Soft Play</h4><a href="play.html">Soft play hire</a><a href="play.html#packages">Packages</a><a href="enquiry.html">Make an enquiry</a></div><div><h4>Information</h4><a href="about.html">About us</a><a href="faq.html">FAQs</a><a href="enquiry.html">Contact</a></div><div class="newsletter"><h4>Join our mailing list</h4><p>Be the first to know about package updates and availability.</p><form><input type="email" placeholder="Enter your email" aria-label="Email address" /><button class="button button-solid">Subscribe</button></form></div></div><div class="footer-bottom"><span>© 2026 Audora Co. All rights reserved.</span><span><a href="terms.html">Terms &amp; Conditions</a> &nbsp;&nbsp; Privacy Policy</span></div></footer>
     <script src="script.js"></script>
+    <script type="module" src="enquiry.js?v=20261006-1"></script>
   </body>
 </html>
