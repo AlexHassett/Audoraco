@@ -3742,6 +3742,10 @@ body.cart-open {
 
   .mobile-menu-toggle {
     display: flex;
+    position: absolute;
+    top: 50%;
+    left: 4%;
+    transform: translateY(-50%);
   }
 
   .site-header.nav-open .mobile-menu-toggle span:nth-child(1) {
@@ -4095,6 +4099,7 @@ body.cart-open {
 
   .mobile-menu-toggle {
     width: 23px;
+    left: 22px;
   }
 
   .header-logo {
@@ -4150,30 +4155,22 @@ body.cart-open {
   }
 
   .audora-way-gallery {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     width: 100%;
     height: auto;
     aspect-ratio: auto;
     margin-top: 32px;
-    flex-direction: column;
   }
 
   .audora-way-image {
+    width: 100%;
     height: auto;
     aspect-ratio: 3 / 2;
   }
 
-  .audora-way-image-bunny,
-  .audora-way-image-child {
-    width: 82%;
-  }
-
-  .audora-way-image-bunny {
-    align-self: flex-start;
-  }
-
-  .audora-way-image-child {
-    align-self: flex-end;
+  .audora-way-image-main {
+    grid-column: 1 / -1;
   }
 
   .audora-way-caption {
@@ -4191,7 +4188,21 @@ body.cart-open {
   }
 
   .footer-top {
-    gap: 25px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 24px;
+  }
+
+  .footer-top > div:first-child {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+
+  .footer-top > div:first-child .footer-logo {
+    margin-inline: auto;
+  }
+
+  .footer-top .newsletter {
+    grid-column: 1 / -1;
   }
 
   .footer-bottom {
