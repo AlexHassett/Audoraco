@@ -348,6 +348,45 @@ h1 {
   text-align: center;
 }
 
+.service-area {
+  max-width: 790px;
+  padding-top: 64px;
+  padding-bottom: 72px;
+  text-align: center;
+}
+
+.service-area h2 {
+  margin: 0;
+  font-size: clamp(32px, 3.5vw, 46px);
+  line-height: 1.15;
+  letter-spacing: 0.025em;
+}
+
+.service-area > p:not(.eyebrow) {
+  max-width: 690px;
+  margin: 22px auto 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.service-area > p a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.service-area-link {
+  display: inline-block;
+  margin-top: 24px;
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .mobile-menu-toggle {
   display: none;
   width: 28px;
@@ -1497,7 +1536,7 @@ footer h4 {
 .package-size {
   margin: 8px 0 0;
   color: var(--sage);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1525,20 +1564,20 @@ footer h4 {
 }
 
 .package-hire-details p {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
 }
 
 .package-hire-details small {
   margin-top: 3px;
-  font-size: 9px;
+  font-size: 12px;
 }
 
 .package-description {
   min-height: 58px;
   margin: 12px 0 12px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.6;
 }
 
@@ -1552,7 +1591,7 @@ footer h4 {
   margin: 0 0 10px;
   color: #897d76;
   font-family: "DM Sans", sans-serif;
-  font-size: 9px;
+  font-size: 10.5px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1562,7 +1601,7 @@ footer h4 {
   margin: 0;
   padding-left: 16px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.65;
 }
 
@@ -1573,6 +1612,172 @@ footer h4 {
 .package-copy .button {
   align-self: flex-start;
   margin-top: auto;
+}
+
+.package-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(340px, 0.85fr);
+  align-items: start;
+  gap: clamp(42px, 5vw, 78px);
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 72px 5% 86px;
+}
+
+.package-detail-media {
+  min-width: 0;
+  background: #f1efec;
+}
+
+.package-detail-media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  object-position: center;
+}
+
+.package-detail-copy {
+  padding-top: 2px;
+}
+
+.package-back-link {
+  display: inline-block;
+  margin-bottom: 45px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.package-back-link span {
+  margin-right: 7px;
+}
+
+.package-detail-copy h1 {
+  font-size: clamp(44px, 4.5vw, 64px);
+}
+
+.package-detail-size {
+  margin: 12px 0 0;
+  color: var(--sage);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.package-detail-price {
+  margin: 12px 0 0;
+  font-family: "DM Serif Display", serif;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.package-detail-description {
+  max-width: 440px;
+  margin: 23px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.package-detail-hire {
+  margin-top: 20px;
+}
+
+.package-detail-hire p,
+.package-detail-hire small {
+  display: block;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.package-detail-hire p {
+  font-weight: 500;
+}
+
+.package-detail-hire small {
+  margin-top: 3px;
+}
+
+.package-colours {
+  margin: 32px 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  padding: 27px 0 0;
+}
+
+.package-colours legend,
+.package-detail-inclusions h2 {
+  padding: 0;
+  color: #897d76;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.package-colour-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 15px;
+}
+
+.package-colour-options button {
+  min-height: 41px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  padding: 0 15px;
+  color: var(--muted);
+  font: inherit;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.package-colour-options button[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: #f1efec;
+  color: var(--ink);
+}
+
+.package-colour-options button:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 3px;
+}
+
+.package-detail-inclusions {
+  margin-top: 30px;
+}
+
+.package-detail-inclusions h2 {
+  margin: 0 0 13px;
+}
+
+.package-detail-inclusions ul {
+  margin: 0;
+  padding-left: 17px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.package-detail-inclusions li + li {
+  margin-top: 4px;
+}
+
+.package-detail-enquiry {
+  min-width: 190px;
+  margin-top: 34px;
 }
 
 .play-palettes {
@@ -4044,6 +4249,21 @@ body.cart-open {
     padding: 60px 22px 72px;
   }
 
+  .package-detail {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    max-width: 760px;
+    padding: 48px 24px 68px;
+  }
+
+  .package-detail-copy {
+    padding-top: 0;
+  }
+
+  .package-back-link {
+    margin-bottom: 35px;
+  }
+
   .favour-product-layout {
     max-width: 700px;
     grid-template-columns: 1fr;
@@ -4064,6 +4284,29 @@ body.cart-open {
 
   .site-header {
     padding: 0 22px;
+  }
+
+  .package-detail {
+    gap: 34px;
+    padding: 32px 16px 56px;
+  }
+
+  .package-detail-copy h1 {
+    font-size: clamp(40px, 13vw, 52px);
+  }
+
+  .package-colour-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .package-colour-options button {
+    width: 100%;
+    padding-inline: 10px;
+  }
+
+  .package-detail-enquiry {
+    width: 100%;
   }
 
   .brand {
@@ -4176,6 +4419,21 @@ body.cart-open {
   .audora-way-caption {
     max-width: 290px;
     margin-top: 20px;
+  }
+
+  .service-area {
+    padding-top: 48px;
+    padding-bottom: 54px;
+  }
+
+  .service-area h2 {
+    font-size: clamp(30px, 8.5vw, 38px);
+  }
+
+  .service-area > p:not(.eyebrow) {
+    margin-top: 18px;
+    font-size: 13px;
+    line-height: 1.75;
   }
 
   .gallery-grid {
