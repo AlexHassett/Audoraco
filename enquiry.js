@@ -147,7 +147,7 @@ const initialiseEnquiryForm = (blockedDates) => {
     }
 
     durationMessage.classList.remove('is-error');
-    if (duration > 360) durationMessage.textContent = 'Our standard hire period is up to 6 hours. Longer celebrations may be available by arrangement.';
+    if (duration > 240) durationMessage.textContent = 'Our standard package includes 4 hours of playtime. Additional playtime may be available for an extra fee, subject to availability.';
   };
 
   const validatePhone = () => {
