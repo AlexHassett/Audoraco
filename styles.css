@@ -1693,9 +1693,10 @@ body.lightbox-open {
 
 .image-lightbox {
   position: fixed;
-  z-index: 1000;
+  z-index: 2147483647;
   inset: 0;
   display: grid;
+  isolation: isolate;
   place-items: center;
   padding: clamp(20px, 4vw, 56px);
   background: rgb(37 33 30 / 92%);
