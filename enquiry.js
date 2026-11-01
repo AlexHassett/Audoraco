@@ -1,6 +1,7 @@
 const eventEnquiryForm = document.querySelector('#event-enquiry-form');
 const earliestEventDate = '2026-10-31';
-const enquiryEndpoint = 'https://formsubmit.co/ajax/hello@audoraco.com.au';
+const enquiryEndpoint = 'https://formsubmit.co/hello@audoraco.com.au';
+const automaticReply = 'Thank you for your enquiry with Audora Co. We have received the details of your celebration and will be in touch to confirm availability and prepare your personalised quote. Please note that submitting an enquiry does not reserve your event date. If you need to add anything, reply to this email or contact hello@audoraco.com.au.';
 
 const initialiseEnquiryForm = (blockedDates) => {
   if (!eventEnquiryForm) return;
@@ -193,66 +194,32 @@ const initialiseEnquiryForm = (blockedDates) => {
 
     const submitButton = eventEnquiryForm.querySelector('button[type="submit"]');
     const formData = Object.fromEntries(new FormData(eventEnquiryForm).entries());
-    const payload = {
-      _subject: `Soft play enquiry — ${eventDate.dataset.value} — ${formData.fullName}`,
-      _template: 'table',
-      _captcha: 'false',
-      _replyto: formData.email,
-      'Event date': eventDate.dataset.value,
-      'Event start time': formData.eventStartTime,
-      'Event finish time': formData.eventFinishTime,
-      'Venue name': formData.venueName,
-      'Event suburb': formData.eventSuburb,
-      'Event postcode': formData.eventPostcode,
-      'Venue address': formData.venueAddress,
-      'Event setting': formData.eventSetting,
-      'Surface type': formData.surfaceType,
-      Occasion: formData.occasion,
-      'Venue access': formData.venueAccess,
-      'Approx. number of children': formData.littleGuests,
-      'Parking / loading notes': formData.parkingNotes,
-      'Package preference': formData.packagePreference,
-      'Preferred Big Play setup size': formData.bigPlaySize,
-      'Colour palette': formData.colourPalette,
-      'Additional details': formData.additionalDetails,
-      Name: formData.fullName,
-      Email: formData.email,
-      'Mobile number': formData.phone,
-      'Preferred contact method': formData.preferredContactMethod,
-    };
     submitButton.disabled = true;
     submitButton.textContent = 'Sending…';
     formStatus.classList.remove('is-success');
-    formStatus.textContent = '';
+    formStatus.textContent = 'Opening secure submission…';
 
-    try {
-      const response = await fetch(enquiryEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      const result = await response.json();
-      if (!response.ok || result.success === false || result.success === 'false') {
-        throw new Error(result.message || 'Unable to send your enquiry.');
+    const setHiddenField = (name, value) => {
+      let field = eventEnquiryForm.querySelector(`input[name="${name}"]`);
+      if (!field) {
+        field = document.createElement('input');
+        field.type = 'hidden';
+        field.name = name;
+        eventEnquiryForm.append(field);
       }
+      field.value = value;
+    };
 
-      formStatus.classList.add('is-success');
-      formStatus.innerHTML = '<strong>Thank you for your enquiry.</strong><p>We\'ve received the details of your celebration and will be in touch to confirm availability and prepare your personalised quote.</p><p>Please note that submitting an enquiry does not reserve your event date.</p>';
-      formStatus.focus();
-      eventEnquiryForm.reset();
-      delete eventDate.dataset.value;
-      updateOutdoorSurface();
-      updateBigPlaySize();
-    } catch (error) {
-      formStatus.textContent = `${error.message} Please try again or email hello@audoraco.com.au.`;
-      formStatus.focus();
-    } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = 'Make an Enquiry';
-    }
+    setHiddenField('_subject', `Soft play enquiry — ${eventDate.dataset.value} — ${formData.fullName}`);
+    setHiddenField('_template', 'table');
+    setHiddenField('_autoresponse', automaticReply);
+    setHiddenField('_replyto', formData.email);
+    setHiddenField('_next', new URL('enquiry-thank-you.html', window.location.href).href);
+    setHiddenField('Event date (ISO)', eventDate.dataset.value);
+
+    eventEnquiryForm.action = enquiryEndpoint;
+    eventEnquiryForm.method = 'POST';
+    eventEnquiryForm.submit();
   });
 };
 

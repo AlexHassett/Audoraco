@@ -1763,6 +1763,34 @@ body.lightbox-open {
   }
 }
 
+.submission-confirmation {
+  max-width: 760px;
+  min-height: 62vh;
+  margin: 0 auto;
+  padding: clamp(90px, 12vw, 150px) 24px;
+  text-align: center;
+}
+
+.submission-confirmation h1 {
+  margin: 12px 0 24px;
+  font-size: clamp(42px, 6vw, 70px);
+}
+
+.submission-confirmation > p:not(.eyebrow) {
+  max-width: 650px;
+  margin: 0 auto 16px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.submission-confirmation .submission-confirmation-note {
+  font-size: 13px;
+}
+
+.submission-confirmation .button {
+  margin-top: 20px;
+}
+
 .package-detail-copy {
   padding-top: 2px;
 }
