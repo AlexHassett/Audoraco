@@ -49,23 +49,6 @@ a {
   background: #c9b9ae;
 }
 
-.booking-announcement {
-  min-height: 48px;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #eee7e2;
-  color: var(--ink);
-  border-bottom: 1px solid var(--line);
-  font-family: "DM Serif Display", serif;
-  font-size: clamp(15px, 1.35vw, 19px);
-  letter-spacing: 0.08em;
-  line-height: 1.25;
-  text-align: center;
-  text-transform: uppercase;
-}
-
 .site-header {
   position: relative;
   min-height: 170px;
