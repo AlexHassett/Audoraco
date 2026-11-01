@@ -210,7 +210,7 @@ const initialiseEnquiryForm = (blockedDates) => {
       if (!response.ok) throw new Error(result.error || 'Unable to send your enquiry.');
 
       formStatus.classList.add('is-success');
-      formStatus.innerHTML = '<strong>Thank you for your enquiry.</strong><p>We\'ve received the details of your celebration and sent a confirmation to your email address.</p><p>Please note that submitting an enquiry does not reserve your event date.</p>';
+      formStatus.innerHTML = '<strong>Thank you for your enquiry.</strong><p>We\'ve received the details of your celebration and sent a confirmation to your email address. Please check your junk or spam folder if it doesn\'t arrive shortly.</p><p>Please note that submitting an enquiry does not reserve your event date.</p>';
       formStatus.focus();
       eventEnquiryForm.reset();
       delete eventDate.dataset.value;
