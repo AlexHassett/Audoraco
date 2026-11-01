@@ -1,11 +1,7 @@
-const openingNotice = document.querySelector('#bookings-opening');
-const enquiryContent = document.querySelector('#enquiry-content');
 const eventEnquiryForm = document.querySelector('#event-enquiry-form');
+const earliestEventDate = '2026-10-31';
 
 const initialiseEnquiryForm = (blockedDates) => {
-  openingNotice.hidden = true;
-  enquiryContent.hidden = false;
-
   if (!eventEnquiryForm) return;
   const formStatus = eventEnquiryForm.querySelector('#form-status');
   const eventDate = eventEnquiryForm.querySelector('#event-date');
@@ -16,6 +12,9 @@ const initialiseEnquiryForm = (blockedDates) => {
   const surfaceField = eventEnquiryForm.querySelector('#outdoor-surface-field');
   const surfaceType = eventEnquiryForm.querySelector('#surface-type');
   const phone = eventEnquiryForm.querySelector('#phone');
+  const packagePreference = eventEnquiryForm.querySelector('#package-preference');
+  const bigPlaySizeField = eventEnquiryForm.querySelector('#big-play-size-field');
+  const bigPlaySize = eventEnquiryForm.querySelector('#big-play-size');
   const calendar = eventEnquiryForm.querySelector('#availability-calendar');
   const calendarMonth = eventEnquiryForm.querySelector('#calendar-month');
   const calendarDays = eventEnquiryForm.querySelector('#calendar-days');
@@ -60,7 +59,7 @@ const initialiseEnquiryForm = (blockedDates) => {
       const isCurrentMonth = dayOffset > 0 && dayOffset <= daysInMonth;
       const dayNumber = dayOffset <= 0 ? previousMonthDays + dayOffset : (dayOffset > daysInMonth ? dayOffset - daysInMonth : dayOffset);
       const isoDate = toIsoDate(date);
-      const isPast = date < today;
+      const isPast = date < today || isoDate < earliestEventDate;
       const isBlocked = blockedDateSet.has(isoDate);
       const unavailable = isPast || isBlocked;
       const button = document.createElement('button');
@@ -156,16 +155,26 @@ const initialiseEnquiryForm = (blockedDates) => {
     phone.setCustomValidity(!phone.value || isValid ? '' : 'Please enter a valid Australian phone number.');
   };
 
+  const updateBigPlaySize = () => {
+    const isBigPlay = packagePreference.value.startsWith('Big Play');
+    bigPlaySizeField.hidden = !isBigPlay;
+    bigPlaySize.disabled = !isBigPlay;
+    bigPlaySize.required = isBigPlay;
+    packagePreference.setAttribute('aria-expanded', String(isBigPlay));
+    if (!isBigPlay) bigPlaySize.value = '';
+  };
+
   eventSetting.addEventListener('change', updateOutdoorSurface);
   startTime.addEventListener('change', validateTimes);
   finishTime.addEventListener('change', validateTimes);
   phone.addEventListener('input', validatePhone);
+  packagePreference.addEventListener('change', updateBigPlaySize);
   updateOutdoorSurface();
 
   const subject = new URLSearchParams(window.location.search).get('subject')?.toLowerCase() || '';
-  const packagePreference = eventEnquiryForm.querySelector('#package-preference');
   const subjectPackage = [...packagePreference.options].find((option) => subject.includes(option.textContent.split(' — ')[0].toLowerCase()));
   if (subjectPackage) packagePreference.value = subjectPackage.value;
+  updateBigPlaySize();
 
   eventEnquiryForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -204,6 +213,7 @@ const initialiseEnquiryForm = (blockedDates) => {
       eventEnquiryForm.reset();
       delete eventDate.dataset.value;
       updateOutdoorSurface();
+      updateBigPlaySize();
     } catch (error) {
       formStatus.textContent = `${error.message} Please try again or email hello@audoraco.com.au.`;
       formStatus.focus();
@@ -220,8 +230,8 @@ fetch('/api/availability', { headers: { Accept: 'application/json' } })
     return response.json();
   })
   .then((configuration) => {
-    if (configuration.enquiriesEnabled) initialiseEnquiryForm(configuration.blockedDates || []);
+    initialiseEnquiryForm(configuration.blockedDates || []);
   })
   .catch(() => {
-    // Fail closed: the opening notice stays visible and the form stays hidden.
+    initialiseEnquiryForm([]);
   });

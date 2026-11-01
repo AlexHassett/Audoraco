@@ -2,8 +2,10 @@ import { getAvailabilityConfiguration } from '../_shared/availability.js';
 
 const recipient = 'hello@audoraco.com.au';
 const requiredFields = ['eventDate', 'eventStartTime', 'eventFinishTime', 'eventSuburb', 'eventPostcode', 'eventSetting', 'venueAccess', 'packagePreference', 'colourPalette', 'fullName', 'email', 'phone'];
-const validPackages = new Set(['Little Play — 2m × 3m — $400', 'Classic Play — 3m × 4m — $550']);
+const validPackages = new Set(['Little Play — 2m × 3m — $400', 'Classic Play — 3m × 4m — $550', 'Signature Play — 4m × 5m — $650', 'Big Play — 5m × 6m or 6m × 6m — $850']);
 const validColours = new Set(['All White', 'Pink', 'Blue', 'Green']);
+const validBigPlaySizes = new Set(['5m × 6m', '6m × 6m']);
+const earliestEventDate = '2026-10-31';
 
 const escapeHtml = (value = '') => String(value)
   .replaceAll('&', '&amp;')
@@ -28,6 +30,7 @@ const fieldRows = [
   ['Approx. number of children', 'littleGuests'],
   ['Parking / loading notes', 'parkingNotes'],
   ['Package preference', 'packagePreference'],
+  ['Preferred Big Play setup size', 'bigPlaySize'],
   ['Colour palette', 'colourPalette'],
   ['Additional details', 'additionalDetails'],
   ['Name', 'fullName'],
@@ -65,7 +68,7 @@ export async function onRequestPost({ request, env }) {
     day: '2-digit',
   }).formatToParts(new Date()).map(({ type, value }) => [type, value]));
   const localToday = `${todayParts.year}-${todayParts.month}-${todayParts.day}`;
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(data.eventDate) || data.eventDate < localToday || availability.blockedDates.includes(data.eventDate)) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(data.eventDate) || data.eventDate < localToday || data.eventDate < earliestEventDate || availability.blockedDates.includes(data.eventDate)) {
     return Response.json({ error: 'That event date is unavailable. Please select another date.' }, { status: 409 });
   }
 
@@ -80,6 +83,11 @@ export async function onRequestPost({ request, env }) {
 
   if (!validPackages.has(data.packagePreference) || !validColours.has(data.colourPalette)) {
     return Response.json({ error: 'Please select a valid package and colour palette.' }, { status: 400 });
+  }
+
+  const isBigPlay = data.packagePreference.startsWith('Big Play');
+  if ((isBigPlay && !validBigPlaySizes.has(data.bigPlaySize)) || (!isBigPlay && data.bigPlaySize)) {
+    return Response.json({ error: 'Please select a valid Big Play setup size.' }, { status: 400 });
   }
 
   if (data.eventFinishTime <= data.eventStartTime || (data.eventSetting === 'outdoors' && !data.surfaceType)) {
