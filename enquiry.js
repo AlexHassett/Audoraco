@@ -1,7 +1,6 @@
 const eventEnquiryForm = document.querySelector('#event-enquiry-form');
 const earliestEventDate = '2026-10-31';
-const enquiryEndpoint = 'https://formsubmit.co/hello@audoraco.com.au';
-const automaticReply = 'Thank you for your enquiry with Audora Co. We have received the details of your celebration and will be in touch to confirm availability and prepare your personalised quote. Please note that submitting an enquiry does not reserve your event date. If you need to add anything, reply to this email or contact hello@audoraco.com.au.';
+const enquiryEndpoint = 'https://audora-enquiry-api.alex-hassett.workers.dev';
 
 const initialiseEnquiryForm = (blockedDates) => {
   if (!eventEnquiryForm) return;
@@ -194,32 +193,36 @@ const initialiseEnquiryForm = (blockedDates) => {
 
     const submitButton = eventEnquiryForm.querySelector('button[type="submit"]');
     const formData = Object.fromEntries(new FormData(eventEnquiryForm).entries());
+    formData.eventDate = eventDate.dataset.value;
+    formData.website = '';
     submitButton.disabled = true;
     submitButton.textContent = 'Sending…';
     formStatus.classList.remove('is-success');
-    formStatus.textContent = 'Opening secure submission…';
+    formStatus.textContent = '';
 
-    const setHiddenField = (name, value) => {
-      let field = eventEnquiryForm.querySelector(`input[name="${name}"]`);
-      if (!field) {
-        field = document.createElement('input');
-        field.type = 'hidden';
-        field.name = name;
-        eventEnquiryForm.append(field);
-      }
-      field.value = value;
-    };
+    try {
+      const response = await fetch(enquiryEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Unable to send your enquiry.');
 
-    setHiddenField('_subject', `Soft play enquiry — ${eventDate.dataset.value} — ${formData.fullName}`);
-    setHiddenField('_template', 'table');
-    setHiddenField('_autoresponse', automaticReply);
-    setHiddenField('_replyto', formData.email);
-    setHiddenField('_next', new URL('enquiry-thank-you.html', window.location.href).href);
-    setHiddenField('Event date (ISO)', eventDate.dataset.value);
-
-    eventEnquiryForm.action = enquiryEndpoint;
-    eventEnquiryForm.method = 'POST';
-    eventEnquiryForm.submit();
+      formStatus.classList.add('is-success');
+      formStatus.innerHTML = '<strong>Thank you for your enquiry.</strong><p>We\'ve received the details of your celebration and sent a confirmation to your email address.</p><p>Please note that submitting an enquiry does not reserve your event date.</p>';
+      formStatus.focus();
+      eventEnquiryForm.reset();
+      delete eventDate.dataset.value;
+      updateOutdoorSurface();
+      updateBigPlaySize();
+    } catch (error) {
+      formStatus.textContent = `${error.message} Please try again or email hello@audoraco.com.au.`;
+      formStatus.focus();
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Make an Enquiry';
+    }
   });
 };
 
