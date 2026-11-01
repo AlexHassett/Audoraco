@@ -10,6 +10,24 @@ const requiredFields = [
   'colourPalette', 'fullName', 'email', 'phone',
 ];
 
+const blockedDates = new Set([
+  '2026-11-01',
+  '2026-11-02',
+  '2026-11-03',
+  '2026-11-04',
+  '2026-11-05',
+  '2026-11-06',
+  '2026-11-07',
+  '2026-11-08',
+  '2026-11-09',
+  '2026-11-10',
+  '2026-11-11',
+  '2026-11-12',
+  '2026-11-13',
+  '2026-11-14',
+  '2026-11-15',
+]);
+
 const fieldLabels = {
   eventDate: 'Event date',
   eventStartTime: 'Event start time',
@@ -87,6 +105,9 @@ export default {
     }
     if (!/^\d{4}-\d{2}-\d{2}$/.test(data.eventDate) || data.eventDate < new Date().toISOString().slice(0, 10)) {
       return json(origin, { error: 'Please select a valid future event date.' }, 400);
+    }
+    if (blockedDates.has(data.eventDate)) {
+      return json(origin, { error: 'That event date is unavailable. Please select another date.' }, 409);
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
       return json(origin, { error: 'Please enter a valid email address.' }, 400);
