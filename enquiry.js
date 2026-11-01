@@ -1,5 +1,6 @@
 const eventEnquiryForm = document.querySelector('#event-enquiry-form');
 const earliestEventDate = '2026-10-31';
+const enquiryEndpoint = 'https://audora-enquiry-api.alex-hassett.workers.dev';
 
 const initialiseEnquiryForm = (blockedDates) => {
   if (!eventEnquiryForm) return;
@@ -191,24 +192,25 @@ const initialiseEnquiryForm = (blockedDates) => {
     }
 
     const submitButton = eventEnquiryForm.querySelector('button[type="submit"]');
-    const payload = Object.fromEntries(new FormData(eventEnquiryForm).entries());
-    payload.eventDate = eventDate.dataset.value;
+    const formData = Object.fromEntries(new FormData(eventEnquiryForm).entries());
+    formData.eventDate = eventDate.dataset.value;
+    formData.website = '';
     submitButton.disabled = true;
     submitButton.textContent = 'Sending…';
     formStatus.classList.remove('is-success');
     formStatus.textContent = '';
 
     try {
-      const response = await fetch('/api/enquiry', {
+      const response = await fetch(enquiryEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(formData),
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || 'Unable to send your enquiry.');
 
       formStatus.classList.add('is-success');
-      formStatus.innerHTML = '<strong>Thank you for your enquiry.</strong><p>We\'ve received the details of your celebration and will be in touch to confirm availability and prepare your personalised quote.</p><p>Please note that submitting an enquiry does not reserve your event date.</p>';
+      formStatus.innerHTML = '<strong>Thank you for your enquiry.</strong><p>We\'ve received the details of your celebration and sent a confirmation to your email address. Please check your junk or spam folder if it doesn\'t arrive shortly.</p><p>Please note that submitting an enquiry does not reserve your event date.</p>';
       formStatus.focus();
       eventEnquiryForm.reset();
       delete eventDate.dataset.value;
@@ -224,7 +226,7 @@ const initialiseEnquiryForm = (blockedDates) => {
   });
 };
 
-fetch('/api/availability', { headers: { Accept: 'application/json' } })
+fetch('availability.json', { headers: { Accept: 'application/json' }, cache: 'no-store' })
   .then((response) => {
     if (!response.ok) throw new Error('Availability is unavailable.');
     return response.json();
