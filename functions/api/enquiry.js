@@ -2,7 +2,7 @@ import { getAvailabilityConfiguration } from '../_shared/availability.js';
 
 const recipient = 'hello@audoraco.com.au';
 const requiredFields = ['eventDate', 'eventStartTime', 'eventFinishTime', 'eventSuburb', 'eventPostcode', 'eventSetting', 'venueAccess', 'packagePreference', 'colourPalette', 'fullName', 'email', 'phone'];
-const validPackages = new Set(['Little Play — 2m × 3m — $400', 'Classic Play — 3m × 4m — $550', 'Signature Play — 4m × 5m — $650', 'Big Play — 5m × 6m or 6m × 6m — $850']);
+const validPackages = new Set(['Little Play — 2m × 3m — $350', 'Classic Play — 3m × 4m — $500', 'Signature Play — 4m × 5m — $650', 'Big Play — 5m × 6m or 6m × 6m — $800']);
 const validColours = new Set(['All White', 'Pink', 'Blue', 'Green']);
 const validBigPlaySizes = new Set(['5m × 6m', '6m × 6m']);
 const earliestEventDate = '2026-10-31';
