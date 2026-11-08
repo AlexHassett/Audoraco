@@ -27,6 +27,7 @@ const blockedDates = new Set([
   '2026-11-14',
   '2026-12-25',
   '2026-12-26',
+  '2027-01-16',
 ]);
 
 const fieldLabels = {
