@@ -139,6 +139,38 @@ a {
   gap: 22px;
 }
 
+.header-instagram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  color: var(--ink);
+}
+
+.header-instagram:hover {
+  color: var(--sage);
+}
+
+.header-instagram:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+@media (max-width: 520px) {
+  .header-actions:has(.header-instagram) {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+  }
+
+  .header-instagram {
+    align-self: flex-end;
+  }
+}
+
 .header-actions button {
   border: 0;
   background: transparent;
